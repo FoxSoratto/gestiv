@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+
+> <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Login - Gerenciador de IPs</title>
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --card: #0d1b2e;
+      --card-light: #12233a;
+      --border: #22344f;
+      --text: #ffffff;
+      --muted: #8ea2bd;
+      --blue: #2563eb;
+      --blue-hover: #1d4ed8;
+      --red: #ef4444;
+      --green: #22c55e;
+      --input-bg: #081425;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.22), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.08), transparent 24%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: rgba(13, 27, 46, 0.96);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 15px;
+      background: var(--card-light);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .error {
+      display: none;
+      color: #fca5a5;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.38);
+      padding: 12px;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: #dce7f5;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    input {
+      height: 46px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: var(--input-bg);
+      color: var(--text);
+      padding: 0 12px;
+      outline: none;
+      font-size: 15px;
+      width: 100%;
+      caret-color: var(--text);
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+    }
+
+    input::placeholder {
+      color: #64748b;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
+      background: var(--input-bg);
+    }
+
+    /*
+      Correção do bug de autofill:
+      Chrome/Edge costumam deixar input preenchido automaticamente com fundo branco/amarelo.
+      Este bloco força o campo a manter o tema escuro da interface.
+    */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 1000px var(--input-bg) inset !important;
+      -webkit-text-fill-color: var(--text) !important;
+      caret-color: var(--text) !important;
+      border: 1px solid var(--border) !important;
+      transition: background-color 9999s ease-in-out 0s;
+    }
+
+    input:-internal-autofill-selected {
+      background-color: var(--input-bg) !important;
+      color: var(--text) !important;
+    }
+
+    button {
+      height: 46px;
+      border: 0;
+      border-radius: 11px;
+      background: var(--blue);
+      color: var(--text);
+      font-weight: 900;
+      cursor: pointer;
+      font-size: 15px;
+      transition: 0.2s ease;
+      margin-top: 4px;
+    }
+
+    button:hover {
+      background: var(--blue-hover);
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .footer-text {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="login-card"
+
+>     <div class="brand"
+
+>       <div class="icon-box">▦</div>
+
+      <div>
+        <h1>Gerenciador de IPs</h1>
+        <p>Acesso restrito</p>
+      </div>
+    </div>
+
+    <div class="error" id="errorBox"
+
+>       Usuário ou senha inválidos.
+    </div>
+
+    <form
+      id="loginForm"
+      method="POST"
+      action="/login"
+      autocomplete="off"
+
+>       <label for="username"
+
+>         Usuário
+        <input
+          id="username"
+          name="usuario"
+          type="text"
+          inputmode="text"
+          placeholder="Digite seu usuário"
+          autocomplete="off"
+          autocapitalize="none"
+          spellcheck="false"
+          required
+          autofocus
+        />
+      </label>
+
+      <label for="password"
+
+>         Senha
+        <input
+          id="password"
+          name="senha"
+          type="password"
+          placeholder="Digite sua senha"
+          autocomplete="new-password"
+          required
+        />
+      </label>
+
+      <button type="submit"
+
+>         Entrar
+      </button>
+    </form>
+
+    <div class="footer-text"
+
+>       Ambiente interno de infraestrutura
+    </div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("erro") === "1") {
+      document.getElementById("errorBox").style.display = "block";
+    }
+
+    /*
+      Pequeno ajuste adicional:
+      Alguns navegadores ainda aplicam autofill após o carregamento.
+      Este trecho força uma atualização visual nos campos.
+    */
+    window.addEventListener("load", () => {
+      const inputs = document.querySelectorAll("input");
+
+      inputs.forEach((input) => {
+        input.style.backgroundColor = "#081425";
+        input.style.color = "#ffffff";
+      });
+    });
+  </script>
+</body>
+</html>

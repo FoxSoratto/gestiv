@@ -1,0 +1,16 @@
+{
+  "name": "vizinho-amigo",
+  "version": "1.0.0",
+  "description": "Plataforma de Apoio à Melhor Idade e Pessoas com Deficiência",
+  "main": "servidor.js",
+  "scripts": {
+    "start": "node servidor.js",
+    "dev": "node --watch servidor.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "sqlite3": "^5.1.7"
+  }
+}

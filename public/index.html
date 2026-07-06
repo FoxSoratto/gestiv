@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+
+> <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Gerenciador de IPs</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="page"
+
+>     <header class="header"
+
+>       <div class="header-title"
+
+>         <div class="icon-box">▦</div>
+
+        <div>
+          <h1>Gerenciador de IPs</h1>
+          <p>Controle de infraestrutura de rede e servidores</p>
+        </div>
+      </div>
+
+      <div class="header-actions"
+
+>   <button class="btn btn-danger-main" id="deleteSelectedBtn" disabled>
+    Excluir selecionados
+  </button>
+
+  <button class="btn btn-secondary" id="pingAllBtn"
+
+>     Testar todos os pings
+  </button>
+
+  <label class="btn btn-secondary import-label"
+
+>     Importar Excel
+    <input
+      type="file"
+      id="excelInput"
+      accept=".xlsx,.xls,.csv"
+      hidden
+    />
+  </label>
+
+  <button class="btn btn-primary" id="openModalBtn"
+
+>     + Novo Equipamento
+  </button>
+
+  <form method="POST" action="/logout" class="logout-form"
+
+>     <button class="btn btn-secondary" type="submit"
+
+>       Sair
+    </button>
+  </form>
+</div>
+    </header>
+
+    <section class="summary-grid"
+
+>       <article class="summary-card"
+
+>         <span class="summary-label">Total</span>
+        <strong id="totalCount">0</strong>
+      </article>
+
+      <article class="summary-card summary-online"
+
+>         <span class="summary-label">Online</span>
+        <strong id="onlineCount">0</strong>
+      </article>
+
+      <article class="summary-card summary-offline"
+
+>         <span class="summary-label">Offline</span>
+        <strong id="offlineCount">0</strong>
+      </article>
+
+      <article class="summary-card summary-unknown"
+
+>         <span class="summary-label">Não testado</span>
+        <strong id="unknownCount">0</strong>
+      </article>
+    </section>
+
+    <section class="search-section"
+
+>       <div class="search-box"
+
+>         <span>🔎</span>
+
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Buscar por Nome, IP, Área, VLAN ou Serviço..."
+        />
+      </div>
+    </section>
+
+    <section class="table-card"
+
+>       <table>
+        <thead>
+          <tr>
+            <th class="select-column"
+
+>               <input type="checkbox" id="selectAllCheckbox" />
+            </th>
+            <th>VLAN</th>
+            <th>Nome</th>
+            <th>IP</th>
+            <th>Área</th>
+            <th>Serviço / Modelo</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+
+        <tbody id="devicesTableBody"></tbody>
+      </table>
+
+      <div class="empty-state" id="emptyState"
+
+>         Nenhum equipamento encontrado.
+      </div>
+    </section>
+  </main>
+
+  <div class="modal-overlay" id="modalOverlay"
+
+>     <div class="modal"
+
+>       <div class="modal-header"
+
+>         <h2 id="modalTitle">Cadastrar Novo Equipamento</h2>
+
+        <button class="modal-close" id="closeModalBtn" type="button"
+
+>           ×
+        </button>
+      </div>
+
+      <form id="deviceForm"
+
+>         <label>
+          VLAN
+          <input
+            type="text"
+            id="vlan"
+            placeholder="Ex: 900"
+          />
+        </label>
+
+        <label>
+          Nome
+          <input
+            type="text"
+            id="nome"
+            placeholder="Ex: V-CVR-AD1"
+            required
+          />
+        </label>
+
+        <label>
+          IP
+          <input
+            type="text"
+            id="ip"
+            placeholder="Ex: 10.10.2.1"
+            required
+          />
+        </label>
+
+        <label>
+          Área
+          <input
+            type="text"
+            id="area"
+            placeholder="Ex: DATACENTER"
+          />
+        </label>
+
+        <label>
+          Serviço / Modelo
+          <input
+            type="text"
+            id="servicoModelo"
+            placeholder="Ex: Active Directory, Switch, Câmera..."
+          />
+        </label>
+
+        <div class="modal-actions"
+
+>           <button type="button" class="btn btn-secondary" id="cancelBtn"
+
+>             Cancelar
+          </button>
+
+          <button type="submit" class="btn btn-primary" id="saveBtn"
+
+>             Salvar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
