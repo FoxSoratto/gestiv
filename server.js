@@ -5,9 +5,9 @@ const path = require("path");
 const ping = require("ping");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 5100;
 
-const DB_PATH = path.join(__dirname, "db.json");
+const DB_PATH = process.env.DB_PATH || path.join(__dirname, "db.json");
 const PUBLIC_PATH = path.join(__dirname, "public");
 
 const LOGIN_USER = "admin";

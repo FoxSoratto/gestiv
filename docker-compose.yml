@@ -1,0 +1,13 @@
+services:
+  ip-manager:
+    build: .
+    container_name: ip-manager-container
+    ports:
+      - "5100:5100"
+    environment:
+      - PORT=5100
+      - DB_PATH=/app/data/db.json
+      - NODE_ENV=production
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

@@ -1,0 +1,11 @@
+node_modules
+db.json
+package-lock.json
+runtime
+.git
+.gitignore
+*.bat
+Dockerfile
+docker-compose.yml
+.dockerignore
+data/
